@@ -1,35 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Listado = () => {
+
+    const [listadoState, setListadoState] = useState([]);
+
+    useEffect(() => {
+        console.log("Componentes del listado de películas cargado");
+        conseguirPeliculas();
+    }, []);
+
+
+    const conseguirPeliculas = () => {
+        let peliculas = JSON.parse(localStorage.getItem("pelis"));
+
+        setListadoState(peliculas);
+    }
+
     return (
         <>
-            <article className="peli-item">
-                <h3 className="title">Desarrollo Web</h3>
-                <p className="descripcion">victorroblesweb.es</p>
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
+            {listadoState != null ?
+                listadoState.map(peli => {
+                    return (
+                        <article key={peli.id} className="peli-item">
+                            <h3 className="title">{peli.titulo}</h3>
+                            <p className="descripcion">{peli.descripcion}</p>
+                            <button className="edit">Editar</button>
+                            <button className="delete">Borrar</button>
+                        </article>
+                    )
+                })
+                : <h2> No hay películas en este listado </h2>
+            }
 
-            <article className="peli-item">
-                <h3 className="title">Desarrollo Web</h3>
-                <p className="descripcion">victorroblesweb.es</p>
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
-
-            <article className="peli-item">
-                <h3 className="title">Desarrollo Web</h3>
-                <p className="descripcion">victorroblesweb.es</p>
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
-
-            <article className="peli-item">
-                <h3 className="title">Desarrollo Web</h3>
-                <p className="descripcion">victorroblesweb.es</p>
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
         </>
     )
 }
