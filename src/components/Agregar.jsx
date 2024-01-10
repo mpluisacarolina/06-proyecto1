@@ -41,7 +41,7 @@ export const Agregar = ({setListadoState}) => {
 
   return (
     <div className="add">
-      <h3 className="title"> {tituloComponente} </h3>
+      <h3 className="title">{tituloComponente} </h3>
         
         <strong>
           {( titulo && descripcion ) && " Has creado la película " + titulo}
